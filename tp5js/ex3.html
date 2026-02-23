@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+</head>
+<body>
+
+<h1>Contact</h1>
+
+<form id="fContact">
+    E-mail :
+    <input type="email" id="email"><br><br>
+
+    Votre message :
+    <textarea id="message"></textarea><br><br>
+
+    <input type="submit" value="Envoyer" onclick="verif(event)">
+    <input type="reset" value="Réinitialiser">
+</form>
+
+<script>
+    const verif = (event) => {
+        const email = document.getElementById("email").value;
+        const msg = document.getElementById("message").value;
+
+        if (email === "" || msg === "") {
+            event.preventDefault();
+            alert("Veuillez remplir l’email et le message !");
+        }
+    };
+</script>
+
+</body>
+</html>

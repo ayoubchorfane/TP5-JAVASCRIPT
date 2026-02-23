@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 4 : Score du Jeu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin: 20px 0;
+        }
+        input[type="checkbox"] {
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        input[type="button"] {
+            margin: 20px 0 10px 0;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .info {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calcul du Score du Jeu</h2>
+    <p class="info">Cochez exactement 3 cases pour calculer votre score</p>
+    
+    <form name="f">
+        <input type="checkbox" name="choix" value="-8"/> Case 1 (valeur: -8) <br/>
+        <input type="checkbox" name="choix" value="5"/> Case 2 (valeur: 5) <br/>
+        <input type="checkbox" name="choix" value="3"/> Case 3 (valeur: 3) <br/>
+        <input type="checkbox" name="choix" value="10"/> Case 4 (valeur: 10) <br/>
+        <input type="checkbox" name="choix" value="0"/> Case 5 (valeur: 0) <br/>
+        <input type="checkbox" name="choix" value="-1"/> Case 6 (valeur: -1) <br/>
+        <input type="checkbox" name="choix" value="-7"/> Case 7 (valeur: -7) <br/>
+        <input type="checkbox" name="choix" value="15"/> Case 8 (valeur: 15) <br/>
+        <input type="checkbox" name="choix" value="8"/> Case 9 (valeur: 8) <br/>
+        <input type="checkbox" name="choix" value="3"/> Case 10 (valeur: 3) <br/>
+        
+        <input type="button" value="Calculer le score du jeu" onclick="CalculScore()"/><br/>
+        <label>Score obtenu :</label>
+        <input type="text" value="" name="resultat" disabled placeholder="Votre score apparaîtra ici"/>
+    </form>
+
+    <script> 
+        const CalculScore = () => {
+            const cases = document.getElementsByName('choix');
+            let nombreCasesCochees = 0;
+            let scoreTotal = 0;
+            let casesCochees = [];
+            for (let i = 0; i < cases.length; i++) {
+                if (cases[i].checked) {
+                    nombreCasesCochees++;
+                    scoreTotal += Number(cases[i].value);
+                    casesCochees.push(i + 1);
+                }
+            }
+            if (nombreCasesCochees !== 3) {
+                alert(`Erreur : Vous avez coché ${nombreCasesCochees} case(s). Veuillez cocher exactement 3 cases !`);
+                document.f.resultat.value = "";
+            } else {
+                document.f.resultat.value = scoreTotal;
+                if (scoreTotal > 15) {
+                    alert(`Félicitations ! Score: ${scoreTotal} - Vous êtes déjà un joueur expert !`);
+                } else {
+                    alert(`Score: ${scoreTotal} - Vous êtes encore un joueur débutant.`);
+                }
+                console.log('Cases cochées:', casesCochees.join(', '));
+                console.log('Score total:', scoreTotal);
+            }
+        }
+    </script>
+</body>
+</html>
